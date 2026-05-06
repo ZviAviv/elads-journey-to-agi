@@ -1,4 +1,4 @@
-# Elad's Journey to GAI
+# Elad's Journey to AGI
 
 A crash course site on Claude Code Desktop, built for Elad.
 

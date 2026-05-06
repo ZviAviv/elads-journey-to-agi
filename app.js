@@ -1,4 +1,4 @@
-// Elad's Journey to GAI — site behavior
+// Elad's Journey to AGI — site behavior
 // Sidebar highlight, prev/next keyboard, glossary search, progress bar.
 
 (function () {
