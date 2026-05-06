@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14 — MCP · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 4 · Going Further</span>
+        <span class="num-big">14</span>
+      </div>
+      <h1 class="module-title">MCP. The way Claude reaches into your other tools.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">MCP stands for Model Context Protocol. It is the open standard that lets Claude talk to external services: GitHub, Slack, Linear, Google Drive, your database. Add an MCP server, and Claude grows new abilities.</p>
+
+      <h2>The core idea</h2>
+      <p>Claude Code ships with tools for files, the shell, and the web. That covers most of what you need locally. But the world has many other systems with their own APIs. MCP is how Claude talks to them in a consistent way.</p>
+      <p>An MCP server runs alongside Claude Code (locally or remotely). It exposes tools that Claude can call: "send a Slack message," "create a Linear ticket," "query a Postgres database." From Claude's point of view, they are just more tools.</p>
+
+      <h2>How to add one</h2>
+      <p>Browse the official registry at <code>registry.anthropic.com</code> or run <code>/mcp</code> to add and manage servers. Each server has a name, a connection method, and usually some configuration (API keys, URLs).</p>
+      <p>Servers are namespaced. A GitHub MCP server might expose a tool called <code>mcp__github__create_issue</code>. The prefix prevents clashes.</p>
+
+      <h2>What MCP is not</h2>
+      <p>MCP is not for adding local powers — file editing, shell commands, web fetches all already exist. MCP is for reaching out to systems Claude does not natively know about.</p>
+      <p>MCP is also not the same as plugins. Plugins are bundles of Claude Code config (skills, hooks, agents). Some plugins include MCP servers; others do not. Plugins are how things get distributed; MCP is one of the things they can distribute.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Add an MCP only when you have a specific service you want Claude to act on regularly.</li>
+            <li>Read the auth and permission requirements before installing. Some need broad scopes.</li>
+            <li>Use tool search to defer loading MCP tool definitions until they are needed. Saves startup context.</li>
+            <li>Prefer official MCPs from the registry. Community ones can be great but vary in quality.</li>
+            <li>Rotate API keys regularly. MCP credentials are still credentials.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Install ten MCPs in case you might need them. Each one adds startup time and context cost.</li>
+            <li>Give MCP servers more permission than they need. Read-only is usually fine for early experimentation.</li>
+            <li>Assume MCPs are free. Many sit on top of paid APIs. Watch your usage.</li>
+            <li>Confuse MCP with subagents. Different mechanisms. Different problems.</li>
+            <li>Trust unofficial MCPs blindly. Inspect what they do before granting credentials.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Installing the GitHub MCP and the GitHub plugin and the <code>gh</code> CLI all at once, then losing track of which one Claude is using. Pick one path. Fewer tools doing the same job is calmer.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Open <code>/mcp</code>. Browse what is in the registry. Pick one service you actually use (Slack, GitHub, Notion). Read what it can do and what it asks for. Do not install yet. The decision is the exercise.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 14 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

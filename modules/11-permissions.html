@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 — Permissions & settings · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 4 · Going Further</span>
+        <span class="num-big">11</span>
+      </div>
+      <h1 class="module-title">Permissions. Less prompt fatigue, no less safety.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">Every confirmation dialog is a tax on your attention. Settings let you pre-approve trusted moves and pre-block scary ones, so the prompts you do see are the ones that matter.</p>
+
+      <h2>Where settings live</h2>
+      <ul>
+        <li><code>~/.claude/settings.json</code> — your personal defaults. Apply everywhere.</li>
+        <li><code>.claude/settings.json</code> — project-level. Shared with anyone who clones.</li>
+        <li><code>.claude/settings.local.json</code> — your local overrides for one project. Gitignored by default.</li>
+      </ul>
+      <p>Precedence: managed &gt; local &gt; project &gt; user. Most specific wins.</p>
+
+      <h2>The shape of a permission rule</h2>
+      <pre><code>{
+  "permissions": {
+    "allow": [
+      "Bash(npm test)",
+      "Bash(npm run build)",
+      "Bash(git status)",
+      "Bash(git diff *)"
+    ],
+    "deny": [
+      "Edit(~/.ssh/**)",
+      "Bash(rm -rf *)"
+    ],
+    "ask": [
+      "Bash(git push *)"
+    ]
+  }
+}</code></pre>
+      <p>Three buckets: allow (run without asking), deny (refuse always), ask (prompt every time). Deny beats allow.</p>
+
+      <h2>Strategy</h2>
+      <p>Start strict. After a week, look at the prompts that bored you. Move those into <code>allow</code>. Look at the prompts that scared you. Make them <code>deny</code>. Iterate.</p>
+      <p>Specific rules beat broad ones. <code>Bash(npm run build)</code> is safer than <code>Bash(npm *)</code>. The narrower the allow, the less surprise.</p>
+
+      <h2>Default mode in settings</h2>
+      <p>You can lock in your starting mode (Module 05) with <code>"defaultMode": "acceptEdits"</code> in user settings. Saves the Shift+Tab dance every session.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Run <code>/permissions</code> to see what is allowed before tweaking.</li>
+            <li>Add specific commands to allow as you notice repeat prompts. Whitelist the boring stuff.</li>
+            <li>Always deny destructive commands explicitly. <code>rm -rf</code>, force pushes, anything irreversible.</li>
+            <li>Keep project-level settings checked into git so the team shares them.</li>
+            <li>Use <code>.claude/settings.local.json</code> for your personal overrides; it is gitignored.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Allow broad patterns to silence prompts. <code>Bash(*)</code> in allow is how disasters happen.</li>
+            <li>Set <code>bypassPermissions</code> on your work machine. Sandboxes only.</li>
+            <li>Forget the precedence order. Local wins over project. Project wins over user.</li>
+            <li>Grant network access to plugins or MCPs that should not need it.</li>
+            <li>Edit settings while a session is running and expect the change to apply mid-session. Restart.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Allowing yourself out of every prompt and then walking away while Claude works. Permissions reduce friction; they do not replace your attention. Stay in the loop.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Open <code>~/.claude/settings.json</code> (create it if missing). Add an allow rule for <code>Bash(ls *)</code> and a deny rule for <code>Bash(rm -rf *)</code>. Save. Restart Claude Code. Ask it to list files in your project. No prompt. Now ask it to delete everything. It refuses. Both behaviors are now baked in.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 11 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

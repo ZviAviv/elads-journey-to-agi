@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 — Plugins · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 3 · The Toolkit</span>
+        <span class="num-big">09</span>
+      </div>
+      <h1 class="module-title">Plugins. Borrowed superpowers.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">A plugin is a bundle someone else made: skills, subagents, hooks, integrations. Install one and Claude knows things it did not know yesterday.</p>
+
+      <h2>What is in a plugin</h2>
+      <p>Plugins ship as packages. Inside, they can include skills (module 07), subagents (module 13), hooks (module 15), and MCP servers (module 14). All registered with one install.</p>
+
+      <h2>How to install one in Desktop</h2>
+      <ol>
+        <li>Click the <strong>+</strong> button next to the message box, or run <code>/plugins</code>.</li>
+        <li>Choose <strong>Browse marketplace</strong>. The official Anthropic registry opens.</li>
+        <li>Find one. Read what it does and what permissions it asks for. Click <strong>Install</strong>.</li>
+        <li>Run <code>/reload-plugins</code> (or restart the session) to activate.</li>
+        <li>Run <code>/help</code> to see the new commands the plugin added.</li>
+      </ol>
+
+      <h2>Namespacing</h2>
+      <p>Plugin skills are namespaced to avoid collisions with your own. A skill called <code>review</code> in a plugin called <code>quality-tools</code> is invoked as <code>/quality-tools:review</code>, not <code>/review</code>. This keeps your personal commands clean.</p>
+
+      <h2>When to install, when to write your own</h2>
+      <p>Install when someone has solved your exact problem better than you would. Write your own when the task is specific to how <em>you</em> work. Plugins are great starting points; your own skills are how you get personal leverage.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Stick to the official marketplace until you have a reason not to. Trust matters.</li>
+            <li>Read what tools the plugin requests. A note-taking plugin needing shell access is a flag.</li>
+            <li>Install one plugin at a time. See if it earns its place before adding another.</li>
+            <li>Uninstall plugins you stop using. Each one adds startup overhead.</li>
+            <li>Look at well-made plugins as study material. They show good skill writing.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Install plugins for things Claude Code already does (file edits, git, web search).</li>
+            <li>Pile up plugins to feel productive. Most of your power comes from your own skills and a clean CLAUDE.md.</li>
+            <li>Trust unsigned plugins from random repos without reading the source.</li>
+            <li>Forget plugins persist. If you install something and never use it, it still loads at startup.</li>
+            <li>Confuse plugins with MCP servers. MCPs connect Claude to remote tools (module 14). Plugins bundle Claude Code config.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Installing five plugins on day one to "see what they do." That is how you end up with a slow startup, prompt fatigue from unfamiliar permissions, and no idea which plugin caused which command. One at a time.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Open <code>/plugins</code>. Browse the marketplace. Pick one that sounds genuinely useful for your week. Install it. Run <code>/help</code> and find the commands it added. Try one of them. If it does not earn its place after a week, uninstall.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 09 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

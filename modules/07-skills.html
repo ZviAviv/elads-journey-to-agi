@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 — Skills · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 3 · The Toolkit</span>
+        <span class="num-big">07</span>
+      </div>
+      <h1 class="module-title">Skills. Teaching Claude your way of working, once.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">A skill is a small Markdown file that tells Claude how to do a recurring task. The first time you paste the same instructions twice, you should be writing a skill instead.</p>
+
+      <h2>What a skill looks like</h2>
+      <p>A skill is one folder with one file in it: <code>SKILL.md</code>. The folder name becomes the slash command. So <code>~/.claude/skills/code-review/SKILL.md</code> creates <code>/code-review</code>.</p>
+      <p>Inside <code>SKILL.md</code>, you write YAML frontmatter and then Markdown instructions:</p>
+      <pre><code>---
+name: code-review
+description: Review staged changes, flag bugs and risky patterns, suggest fixes.
+---
+
+When this skill runs, do the following:
+
+1. Run `git diff --staged` to see what changed.
+2. For each file, check for: missing error handling, magic numbers,
+   dead code, security risks.
+3. Write a report grouped by file with line references.</code></pre>
+
+      <h2>Where they live</h2>
+      <ul>
+        <li><strong>Personal:</strong> <code>~/.claude/skills/</code> — available in every project on your machine.</li>
+        <li><strong>Project:</strong> <code>.claude/skills/</code> inside a project — shared with anyone who clones the repo.</li>
+        <li><strong>Plugin:</strong> distributed inside a plugin (more in module 09).</li>
+      </ul>
+
+      <h2>How they get invoked</h2>
+      <p>Two ways. Either you type <code>/code-review</code> directly, or Claude reads the <code>description</code> in your frontmatter and triggers the skill itself when your request matches. That description is doing real work — it is the trigger. Make it specific.</p>
+      <p>If you want to control timing (deploys, commits, anything with side effects), set <code>disable-model-invocation: true</code> in the frontmatter. Now Claude will not auto-invoke. Only you can.</p>
+
+      <h2>Skill vs slash command vs CLAUDE.md vs subagent</h2>
+      <p><strong>CLAUDE.md:</strong> facts and conventions. "Always use pnpm."</p>
+      <p><strong>Skill:</strong> a procedure. "Here is how I review code."</p>
+      <p><strong>Slash command:</strong> in modern Claude Code, slash commands and skills are the same thing — typing <code>/foo</code> runs the <code>foo</code> skill.</p>
+      <p><strong>Subagent:</strong> a separate context to delegate work to (module 13).</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Write a skill the second time you paste the same instructions.</li>
+            <li>Make the <code>description</code> specific and verb-first. "Deploy to staging" beats "deploy stuff."</li>
+            <li>Set <code>disable-model-invocation: true</code> for anything with side effects.</li>
+            <li>Keep <code>SKILL.md</code> short. Move long reference material into separate files in the skill folder, link from <code>SKILL.md</code>.</li>
+            <li>Commit project-level skills to git. They are team config.</li>
+            <li>Iterate live. Edit a skill mid-session and the changes apply on next invocation.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Stuff one mega-skill with eight unrelated tasks. Split it.</li>
+            <li>Write vague descriptions. Vague description = skill never auto-triggers.</li>
+            <li>Put everything in CLAUDE.md when it should be a skill. CLAUDE.md is for what is true; skills are for what to do.</li>
+            <li>Forget to test a new skill. Type its slash command and watch what happens.</li>
+            <li>Build skills for things Claude already does well unprompted. You are adding overhead, not capability.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        The full body of a skill does <em>not</em> load into context until the skill is invoked. Only the description loads at session start. That is the whole point — skills stay cheap until you need them. Write skills freely.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Make a skill called <code>journal-today</code> in <code>.claude/skills/journal-today/SKILL.md</code> inside your <code>elad-test</code> project. Description: <em>"Create a markdown journal entry in journal/ for today's date with a heading and three bullet points for things learned."</em> Body: a short procedure. Save. In Claude Code, type <code>/journal-today</code>. Did it run?</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 07 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

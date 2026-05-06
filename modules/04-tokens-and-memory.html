@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 — Tokens & memory · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 2 · The Engine</span>
+        <span class="num-big">04</span>
+      </div>
+      <h1 class="module-title">Tokens, context, and the memory you forget you have.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">Claude does not have memory the way you do. It has a window. Manage the window well and Claude feels brilliant. Manage it badly and Claude feels forgetful.</p>
+
+      <h2>Tokens, in one paragraph</h2>
+      <p>A token is roughly four characters of text. The word <em>banana</em> is two tokens. A page of writing is around 250. The "context window" is the total amount of text Claude can see in one turn: your message, the conversation so far, the files it has read, the tool outputs it has run. Sonnet and Opus give you 200,000 tokens by default, up to one million if you turn on extended context. Plenty for almost anything, until it isn't.</p>
+
+      <h2>The two kinds of memory</h2>
+      <p><strong>Conversation memory.</strong> Lives only inside the current session. Closes when you start a new one (or when you run <code>/clear</code>).</p>
+      <p><strong>Persistent memory.</strong> Survives sessions. Two flavors:</p>
+      <ul>
+        <li><code>CLAUDE.md</code> — a file you write, sitting at the top of your project. Loaded into every session in that folder. Use it for facts that never change: build commands, conventions, who to ask, where things live.</li>
+        <li><strong>Auto-memory</strong> — a file Claude writes for you in <code>~/.claude/projects/&lt;your-project&gt;/memory/</code>. Claude saves things it learns about you over time. You can read it (run <code>/memory</code>), edit it, or delete entries.</li>
+      </ul>
+
+      <h2>The four commands you will actually use</h2>
+      <p><code>/init</code> — once per project, at the start. Claude reads the codebase and drafts a starter <code>CLAUDE.md</code> for you. Edit it. Commit it.</p>
+      <p><code>/memory</code> — open the memory files (your CLAUDE.md and the auto-memory). Edit in place. Add a fact, remove a stale one.</p>
+      <p><code>/context</code> — show what is currently filling your context window: rules, files, tools, conversation. Run this if responses start feeling slow or vague.</p>
+      <p><code>/compact focus on X</code> — when context fills up, this summarizes the conversation so far while keeping the spine you specified. <em>"/compact focus on the auth refactor"</em> drops the digressions, keeps the work.</p>
+
+      <h2>Auto-compaction (the safety net)</h2>
+      <p>You will not hit "out of context" errors. When the window gets full, Claude Code automatically summarizes old conversation, drops verbose tool outputs, and re-injects your CLAUDE.md and the active task. You will see a small banner saying so. The lesson: put your durable rules in CLAUDE.md, not in chat. Chat gets summarized away.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Run <code>/init</code> the moment you open a new project. Future sessions get smarter for free.</li>
+            <li>Keep <code>CLAUDE.md</code> short and factual. Aim under 200 lines.</li>
+            <li>Use nested <code>CLAUDE.md</code> files inside subfolders for scope-specific rules. They load only when relevant.</li>
+            <li>Check <code>/context</code> when responses get sluggish or off-topic.</li>
+            <li>Use <code>/compact focus on …</code> before context hits 80%, naming what to preserve.</li>
+            <li>Use <code>/clear</code> when switching to a totally different task in the same project.</li>
+            <li>Read <code>/memory</code> every week or two. Prune outdated facts.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Treat <code>CLAUDE.md</code> as a notebook. It is a contract. Vague entries get ignored.</li>
+            <li>Paste long reference material into chat hoping Claude "remembers" it next session. Put it in a file.</li>
+            <li>Run <code>/compact</code> at 30% context. You will lose detail you still needed.</li>
+            <li>Stuff every preference into one massive <code>CLAUDE.md</code>. Split rules into files or skills.</li>
+            <li>Forget that auto-memory persists across sessions. If Claude learned something wrong, fix it.</li>
+            <li>Repeat instructions in every prompt that already live in <code>CLAUDE.md</code>. Trust the file.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Editing <code>CLAUDE.md</code> mid-session and expecting the change to apply now. It applies to the <em>next</em> session. End the session, start a new one, and the new rule is live.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> In your <code>elad-test</code> folder, run <code>/init</code> and let Claude draft a <code>CLAUDE.md</code>. Open the file. Add one line: <em>"My name is Elad. Always greet me by name in the first response of a session."</em> Save. Close the session. Open a new one. Send "hi." Did it greet you?</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 04 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

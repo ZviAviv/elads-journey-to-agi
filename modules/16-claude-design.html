@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>16 — Claude Design vs Claude Code · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 4 · Going Further</span>
+        <span class="num-big">16</span>
+      </div>
+      <h1 class="module-title">Claude Design vs Claude Code. Two doors, two destinations.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">Anthropic Labs released Claude Design in April 2026 as a sister product to Claude Code. They share the same underlying model. They do very different jobs.</p>
+
+      <h2>What Claude Design is</h2>
+      <p>Claude Design is a tool for visual creation: prototypes, mockups, pitch decks, marketing collateral, design system explorations, code-powered prototypes (voice, video, 3D, embedded AI). It is built around iteration on visual artifacts, not text files.</p>
+      <p>It is powered by Opus 4.7 and aimed at people who think in pictures: designers, founders, marketers, researchers. You describe what you want; Claude Design produces something you can see, edit, and iterate on. No coding required to operate.</p>
+
+      <h2>What Claude Code is</h2>
+      <p>You already know this one — the rest of this guide. Claude Code is for building software. It reads files, edits code, runs commands, manages git, ships features.</p>
+
+      <h2>The decision</h2>
+      <p>Need a deck, a landing page mockup, a brand exploration, an interactive prototype? <strong>Claude Design.</strong></p>
+      <p>Need to build the actual app, fix a real bug, automate a workflow that touches files? <strong>Claude Code.</strong></p>
+      <p>Want a designed prototype that turns into a real codebase? Start in Claude Design, hand it off to Claude Code. Claude Design bundles everything into a handoff package the moment you decide to build for real.</p>
+
+      <h2>Why both, not one</h2>
+      <p>The two products optimize for different feedback loops. Visual iteration wants to see, drag, recolor, recompose. Code iteration wants to read, edit, test, commit. Squashing both into one tool always compromises both. So Anthropic shipped two.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Use Claude Design for anything that lives as pixels: decks, mockups, brand experiments, social graphics.</li>
+            <li>Use Claude Code for anything that lives as files: features, scripts, tests, docs.</li>
+            <li>Hand off intentionally. Design the prototype, then bring it into Claude Code to build.</li>
+            <li>Open both apps if your work alternates. Switching is cheap; cramming is not.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Try to build production software in Claude Design. Wrong feedback loop.</li>
+            <li>Try to design a brand in Claude Code. It can render HTML, but the iteration speed is wrong.</li>
+            <li>Confuse Claude Design with chat Artifacts. Artifacts are inline previews; Design is a full app.</li>
+            <li>Assume one will replace the other. They are siblings, not rivals.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Reaching for Claude Design because the work feels "creative." All work is creative. The right question is what kind of artifact you are iterating on. Pixels = Design. Files = Code.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Open Claude Design. Ask it for a mockup of a one-pager that explains "Elad's Journey to GAI" — the thing you have been reading. Notice how the conversation feels different from Claude Code. Different tool, different rhythm.</p>
+      </div>
+
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 2px solid var(--ink);">
+        <h2 style="color: var(--accent-warm);">End of the journey</h2>
+        <p>You made it. Sixteen modules in, you have the vocabulary and the muscle memory to use Claude Code Desktop seriously.</p>
+        <p>From here, treat the <a href="../glossary.html">Glossary</a> as your reference and the <a href="../tips.html">Tips Index</a> as your cheatsheet. Come back to any module when you forget something. The site is not going anywhere.</p>
+        <p>Now go build something.</p>
+        <p style="text-align: right; color: var(--muted); font-style: italic;">— Aviv</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 16 of 16 · The end</span>
+      <span><code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

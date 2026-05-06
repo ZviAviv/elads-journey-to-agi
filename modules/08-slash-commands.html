@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>08 — Slash commands · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 3 · The Toolkit</span>
+        <span class="num-big">08</span>
+      </div>
+      <h1 class="module-title">The slash commands you will reach for daily.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">Type <code>/</code> in the message box and you get a menu. Most of these you will never need. About a dozen you will use every week. Here they are.</p>
+
+      <h2>The essential dozen</h2>
+      <ul>
+        <li><code>/help</code> — list every command and skill available right now. Always up to date. Run it when stuck.</li>
+        <li><code>/init</code> — once per project. Generates a starter <code>CLAUDE.md</code> from the codebase.</li>
+        <li><code>/memory</code> — open and edit your memory files (CLAUDE.md and auto-memory).</li>
+        <li><code>/context</code> — see what is currently filling your context window.</li>
+        <li><code>/compact focus on …</code> — summarize conversation while keeping the spine.</li>
+        <li><code>/clear</code> — start a fresh session. Old session is saved to history; you can resume.</li>
+        <li><code>/resume</code> — pick a previous session by name to keep working.</li>
+        <li><code>/model [name]</code> — switch model mid-session. <code>/model haiku</code>, <code>/model opus</code>, <code>/model opusplan</code>.</li>
+        <li><code>/effort [level]</code> — tune reasoning depth. <code>medium</code>, <code>high</code>, <code>xhigh</code>, <code>max</code>.</li>
+        <li><code>/agents</code> — list and manage subagents (module 13).</li>
+        <li><code>/permissions</code> — view and tweak what tools the agent can use without prompting.</li>
+        <li><code>/rename</code> — give the current session a name so you can find it later in <code>/resume</code>.</li>
+      </ul>
+
+      <h2>Worth knowing about</h2>
+      <ul>
+        <li><code>/cost</code> and <code>/usage</code> — check session and plan spend.</li>
+        <li><code>/diff</code> — review all the edits made this session in one view.</li>
+        <li><code>/doctor</code> — diagnose hook, MCP, or permission setup issues.</li>
+        <li><code>/loop [interval] [prompt]</code> — run a task on a schedule. "Check the deploy every 5 minutes."</li>
+        <li><code>/plan</code> — drop straight into Plan mode for the next request.</li>
+        <li><code>/plugins</code> — open the plugin browser.</li>
+      </ul>
+
+      <h2>Custom slash commands</h2>
+      <p>Anything you put in <code>.claude/skills/&lt;name&gt;/SKILL.md</code> shows up as <code>/&lt;name&gt;</code>. That is the only mechanism. (Older guides mention <code>.claude/commands/</code> — still works, but skills are the modern path. See module 07.)</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Run <code>/help</code> the first time you open the app. The list grows as you install plugins and skills.</li>
+            <li>Use <code>/rename</code> on any session you might want to find again. Untitled sessions are hard to spot in <code>/resume</code>.</li>
+            <li>Use <code>/context</code> proactively when responses get sluggish. Don't wait for compaction.</li>
+            <li>Keep a mental shortcut: <code>/clear</code> when switching tasks, <code>/compact</code> when continuing one.</li>
+            <li>Use <code>/doctor</code> first when something feels broken — it surfaces 80% of issues immediately.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Type <code>/clear</code> thinking you are deleting history. You are not. Old sessions stay in <code>/resume</code>.</li>
+            <li>Memorize commands you never use. <code>/help</code> is one keystroke.</li>
+            <li>Use <code>/compact</code> at low context. You will lose detail you still need.</li>
+            <li>Run <code>/init</code> on a project that already has a <code>CLAUDE.md</code> you have customized. It will overwrite.</li>
+            <li>Forget that arguments after the slash are a thing. <code>/compact focus on auth</code> works much better than bare <code>/compact</code>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Mixing up <code>/clear</code> and <code>/compact</code>. <code>/clear</code> ends the session and starts a new one. <code>/compact</code> keeps the same session but summarizes what came before. Different tools, different moments.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Run <code>/help</code> in <code>elad-test</code>. Read every command in the list. Then run <code>/rename my-first-session</code>. Close the app. Reopen. Run <code>/resume</code> and find your session by name. That is your save game.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 08 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

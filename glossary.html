@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glossary · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="glossary.html">Glossary</a>
+        <a href="tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="glossary-head">
+      <div class="module-meta">
+        <span class="part-tag">Reference</span>
+        <span class="num-big">G</span>
+      </div>
+      <h1 class="module-title">Glossary.</h1>
+    </header>
+
+    <section class="search-wrap">
+      <label for="search">Search the glossary</label>
+      <input type="search" id="search" placeholder="Type a term...   (or press / from anywhere)" autocomplete="off">
+      <p class="search-hint">Press <code>/</code> on any page to jump here</p>
+    </section>
+
+    <ul class="glossary-list">
+      <li data-search-item><dt>Agent</dt><dd>A language model with access to tools (file system, shell, web) that can take actions on its own in a loop, not just produce text. Claude Code is an agent. ChatGPT in your browser is not.</dd></li>
+      <li data-search-item><dt>Anthropic</dt><dd>The company that builds Claude. Headquartered in San Francisco, founded in 2021.</dd></li>
+      <li data-search-item><dt>Ask permissions mode</dt><dd>The default Claude Code mode. Claude prompts before every file edit and shell command. Safest, slowest.</dd></li>
+      <li data-search-item><dt>Auto Accept Edits</dt><dd>A mode where file edits and basic file operations happen automatically. Other shell commands still ask. Switch with <code>Shift+Tab</code>.</dd></li>
+      <li data-search-item><dt>Auto-memory</dt><dd>A file Claude maintains in <code>~/.claude/projects/&lt;project&gt;/memory/</code> with things it has learned about you. You can read, edit, or delete entries via <code>/memory</code>.</dd></li>
+      <li data-search-item><dt>Bypass permissions</dt><dd>A mode that disables all confirmation prompts. Only safe inside sandboxes or VMs. Never run on your main machine.</dd></li>
+      <li data-search-item><dt>Chat (Claude.ai)</dt><dd>The browser-based chat interface. Stateless, no file access, good for explanations and brainstorming.</dd></li>
+      <li data-search-item><dt>Claude Code</dt><dd>Anthropic's agentic coding tool. Available as a Desktop app (Mac, Windows) and a CLI. The subject of this guide.</dd></li>
+      <li data-search-item><dt>Claude Design</dt><dd>An Anthropic Labs product launched April 2026 for visual creation: prototypes, mockups, decks, design systems. Powered by Opus 4.7. See module 16.</dd></li>
+      <li data-search-item><dt>CLAUDE.md</dt><dd>A Markdown file at the root of your project containing facts and conventions Claude should know. Loaded into every session in that folder. Generate one with <code>/init</code>.</dd></li>
+      <li data-search-item><dt>Compaction</dt><dd>The automatic process of summarizing old conversation when the context window fills, so the session can continue. Trigger manually with <code>/compact focus on …</code>.</dd></li>
+      <li data-search-item><dt>Context window</dt><dd>The total amount of text Claude can see in one turn: messages, files, tool outputs, system prompts. Sonnet/Opus default to 200,000 tokens; up to 1M with extended context.</dd></li>
+      <li data-search-item><dt>Cowork</dt><dd>Anthropic's surface for non-developer knowledge work. Connects to Drive, Gmail, DocuSign, FactSet. Manipulates documents, no code required.</dd></li>
+      <li data-search-item><dt>Custom slash command</dt><dd>A slash command you define yourself by creating a skill in <code>.claude/skills/&lt;name&gt;/SKILL.md</code>. Folder name becomes the command name.</dd></li>
+      <li data-search-item><dt>Effort</dt><dd>A dial that controls how hard the model thinks per turn. Set with <code>/effort medium|high|xhigh|max</code>. Higher = more tokens spent reasoning.</dd></li>
+      <li data-search-item><dt>Extended context</dt><dd>A 1-million-token context window option, available as <code>opus[1m]</code> or <code>sonnet[1m]</code>. Same per-token cost; useful for huge codebases.</dd></li>
+      <li data-search-item><dt>Fast mode</dt><dd>A toggle (<code>/fast</code>) that uses Opus 4.6 instead of 4.7. Slightly less capable, noticeably faster. Only available on Opus.</dd></li>
+      <li data-search-item><dt>Frontmatter</dt><dd>YAML metadata at the top of a Markdown file (between <code>---</code> markers). In skills, defines the name, description, and behavior of the skill.</dd></li>
+      <li data-search-item><dt>GAI</dt><dd>Whatever you want it to mean. The point is the journey.</dd></li>
+      <li data-search-item><dt>Git</dt><dd>The version control system Claude Code integrates with. Used to track file history, create commits, branches, and worktrees.</dd></li>
+      <li data-search-item><dt>Git worktree</dt><dd>A separate folder on your filesystem checked out to a different branch of the same repository. Lets you run two Claude sessions on the same repo without collision.</dd></li>
+      <li data-search-item><dt>Haiku</dt><dd>The fastest, cheapest model in the Claude family. Current: Haiku 4.5. Good for quick tasks, formatting, tests.</dd></li>
+      <li data-search-item><dt>Hook</dt><dd>A script that runs at a specific moment in the agent loop (PreToolUse, PostToolUse, Stop, etc). Configured in <code>.claude/settings.json</code>. Used for guarantees, not guidance.</dd></li>
+      <li data-search-item><dt>MCP (Model Context Protocol)</dt><dd>An open standard for connecting Claude to external tools (GitHub, Slack, Linear, databases). MCP servers expose tools Claude can call.</dd></li>
+      <li data-search-item><dt>Mode</dt><dd>How much permission the agent has to act without asking. Five modes: Ask, Auto Accept Edits, Plan, Auto, Bypass. Cycle with <code>Shift+Tab</code>.</dd></li>
+      <li data-search-item><dt>Model</dt><dd>Which version of Claude is doing the thinking. Pick with <code>/model</code>. Three families: Opus, Sonnet, Haiku.</dd></li>
+      <li data-search-item><dt>Opus</dt><dd>The most capable Claude model. Current: Opus 4.7. Best for hard reasoning, complex refactors, architecture.</dd></li>
+      <li data-search-item><dt>opusplan</dt><dd>An alias that uses Opus while planning and switches to Sonnet to execute. Best of both worlds for big tasks.</dd></li>
+      <li data-search-item><dt>Permissions</dt><dd>Rules in <code>settings.json</code> that pre-approve, ask, or block specific tool uses. Three buckets: <code>allow</code>, <code>deny</code>, <code>ask</code>. Deny beats allow.</dd></li>
+      <li data-search-item><dt>Plan mode</dt><dd>A read-only mode where Claude can look, search, and propose but cannot edit or execute. Approve the plan, then switch modes to act.</dd></li>
+      <li data-search-item><dt>Plugin</dt><dd>A bundle of Claude Code config (skills, hooks, subagents, MCP servers) that ships as one installable package. Browse via <code>/plugins</code>.</dd></li>
+      <li data-search-item><dt>Prompt</dt><dd>What you type into the message box. For agents, prompts work best when they state the goal, give context, and define done.</dd></li>
+      <li data-search-item><dt>Session</dt><dd>One continuous conversation with Claude in one folder. Sessions are saved; resume them with <code>/resume</code>.</dd></li>
+      <li data-search-item><dt>settings.json</dt><dd>The config file for permissions, hooks, plugins, and defaults. Three locations: user, project, local.</dd></li>
+      <li data-search-item><dt>Skill</dt><dd>A small Markdown file (<code>SKILL.md</code>) that teaches Claude a procedure. Folder name becomes the slash command. Lives in <code>.claude/skills/</code> or <code>~/.claude/skills/</code>.</dd></li>
+      <li data-search-item><dt>Slash command</dt><dd>A command typed into Claude Code starting with <code>/</code>. Built-in commands like <code>/help</code>, <code>/init</code>, <code>/model</code>, plus any skills you have installed.</dd></li>
+      <li data-search-item><dt>Sonnet</dt><dd>The balanced Claude model. Current: Sonnet 4.6. The default for daily work.</dd></li>
+      <li data-search-item><dt>Subagent</dt><dd>A separate Claude with its own context, dispatched by the main session to do one task and return a summary. Manage with <code>/agents</code>.</dd></li>
+      <li data-search-item><dt>Token</dt><dd>The unit of text Claude counts. Roughly four characters per token. The context window is measured in tokens.</dd></li>
+      <li data-search-item><dt>Tool use</dt><dd>When the model invokes a capability — reading a file, running a shell command, fetching a webpage. The defining feature of an agent.</dd></li>
+      <li data-search-item><dt>Worktree</dt><dd>See <em>Git worktree</em>.</dd></li>
+    </ul>
+
+    <p data-no-results style="display:none; text-align:center; padding:2rem; font-family: var(--font-mono); color: var(--muted);">No matches.</p>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Glossary · Elad's Journey to GAI</span>
+      <span><code>/</code> to focus search</span>
+    </footer>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

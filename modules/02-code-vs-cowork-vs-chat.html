@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 — Code vs Cowork vs Chat · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 1 · The Frame</span>
+        <span class="num-big">02</span>
+      </div>
+      <h1 class="module-title">Three doors. Same Claude. Different jobs.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">Anthropic ships three ways to talk to Claude. Picking the wrong one is the most common reason people say "I tried it, it did not work."</p>
+
+      <h2>The three surfaces</h2>
+      <p><strong>Claude.ai chat.</strong> The browser tab. Stateless, friendly, no access to your computer. Best for thinking out loud, learning, drafts, paste-and-go conversations.</p>
+      <p><strong>Cowork.</strong> Anthropic's surface for non-developer knowledge work. It connects to Google Drive, Gmail, DocuSign, FactSet. It manipulates documents, extracts data, runs multi-step workflows over your files. No code required, no terminal, no git.</p>
+      <p><strong>Claude Code Desktop.</strong> The app. Reads your folders, edits files, runs commands, uses git, builds software. The full agent in a window with diffs, terminal, and a preview pane.</p>
+
+      <figure class="figure">
+        <span class="figure-label">Pick your surface</span>
+        <div class="compare-grid">
+          <div class="compare-card">
+            <div class="tag">Chat</div>
+            <h3 class="name">Claude.ai</h3>
+            <p class="for">For thinking out loud.</p>
+            <ul>
+              <li>Explanations and definitions</li>
+              <li>Brainstorming and drafts</li>
+              <li>One-shot rewrites of pasted text</li>
+              <li>No file or computer access</li>
+            </ul>
+          </div>
+          <div class="compare-card">
+            <div class="tag">Cowork</div>
+            <h3 class="name">Cowork</h3>
+            <p class="for">For knowledge work in your tools.</p>
+            <ul>
+              <li>Drive, Gmail, DocuSign, FactSet</li>
+              <li>Extract data across documents</li>
+              <li>Multi-step office workflows</li>
+              <li>No code, no terminal</li>
+            </ul>
+          </div>
+          <div class="compare-card">
+            <div class="tag">Code</div>
+            <h3 class="name">Claude Code</h3>
+            <p class="for">For building on your computer.</p>
+            <ul>
+              <li>Reads and edits files locally</li>
+              <li>Runs commands, uses git</li>
+              <li>Plans, refactors, ships</li>
+              <li>The full agent loop</li>
+            </ul>
+          </div>
+        </div>
+        <p class="figure-caption">All three cost the same in your plan. The only question is fit.</p>
+      </figure>
+
+      <h2>The decision in one sentence</h2>
+      <p>If you are <em>thinking</em>, use chat. If you are <em>doing office work</em>, use Cowork. If you are <em>building or fixing something on your computer</em>, use Claude Code.</p>
+
+      <h2>How they coexist</h2>
+      <p>You will end up with all three open. That is normal and good. Sketch an idea in chat. Pull research into Cowork. Build the actual thing in Code. They each cost the same in your plan, so the only question is fit.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Default to chat for "explain this" or "what would you do here." Cheapest cognitively.</li>
+            <li>Use Cowork when the work lives in Drive, Gmail, or a spreadsheet you do not want Claude to clone locally.</li>
+            <li>Use Claude Code when the work lives in a folder on your machine and would benefit from version control.</li>
+            <li>Move work between surfaces deliberately. Chat to plan, Code to build, Cowork to ship the report.</li>
+            <li>Bookmark all three. Friction kills the habit.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Paste your codebase into chat. Chat cannot run it, cannot save changes, and forgets after a tab close.</li>
+            <li>Try to build a real product in Cowork. Wrong tool, wrong feedback loop.</li>
+            <li>Open Claude Code to ask "what is a closure." That is a chat question.</li>
+            <li>Assume one surface knows what you did in another. They do not share memory.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Hearing "Claude Code" and assuming it is for developers only. The Desktop app is genuinely usable by anyone who can install software. The "Code" name is about what it can do, not about who you have to be.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Pick a real task from your week. Write it in one sentence on a sticky note. Now write next to it which of the three surfaces fits best, and why. Open that one. Do the task. Notice if you wanted to switch halfway. That is information.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 02 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

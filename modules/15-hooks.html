@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>15 — Hooks · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 4 · Going Further</span>
+        <span class="num-big">15</span>
+      </div>
+      <h1 class="module-title">Hooks. Automating the moments Claude can't see.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">A hook is a small script that runs at a specific moment in the agent loop: before a tool runs, after a file is edited, when the session ends. The harness fires them, not Claude. That makes them dependable.</p>
+
+      <h2>Why hooks exist</h2>
+      <p>If you ask Claude "always run the linter after editing TypeScript files," sometimes Claude will, sometimes Claude won't. Memory drifts. Hooks make it a guarantee. The hook fires every time, regardless of what Claude decides.</p>
+
+      <h2>The events</h2>
+      <ul>
+        <li><strong>PreToolUse</strong> — fires before a tool runs. Can block.</li>
+        <li><strong>PostToolUse</strong> — fires after. Good for "now lint this file."</li>
+        <li><strong>UserPromptSubmit</strong> — fires when you press Enter on a message.</li>
+        <li><strong>Stop</strong> — fires when the agent's turn ends.</li>
+        <li><strong>SessionStart</strong> / <strong>SessionEnd</strong> — start and end of a session.</li>
+      </ul>
+
+      <h2>The shape of a hook</h2>
+      <p>A hook is a shell script that reads JSON on stdin (info about what happened) and writes JSON on stdout (its decision: allow, block, modify). Configure them in <code>.claude/settings.json</code>:</p>
+      <pre><code>{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/lint.sh"
+      }
+    ]
+  }
+}</code></pre>
+
+      <h2>Recipes worth stealing</h2>
+      <ul>
+        <li><strong>Lint after edit.</strong> PostToolUse on Edit, runs your linter on the changed file.</li>
+        <li><strong>Block dangerous shell commands.</strong> PreToolUse on Bash, refuses anything matching <code>rm -rf</code>.</li>
+        <li><strong>Notify on stop.</strong> Stop hook, sends a desktop notification or Slack ping when a long task finishes.</li>
+        <li><strong>Auto-format on edit.</strong> PostToolUse on Edit, runs Prettier on the file.</li>
+      </ul>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Reach for hooks when you want a guarantee, not guidance. Memory is guidance; hooks are enforcement.</li>
+            <li>Keep hook scripts fast. They run synchronously. Slow hooks slow every tool use.</li>
+            <li>Use <code>$CLAUDE_PROJECT_DIR</code> in paths so hooks work for any teammate who clones the repo.</li>
+            <li>Test hooks locally with sample JSON input before wiring them in.</li>
+            <li>Use <code>.claude/settings.local.json</code> while iterating. Move stable hooks to project settings to share.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Put long-running scripts in hooks. Network calls and big builds belong elsewhere.</li>
+            <li>Hide important information in hook output that you never read.</li>
+            <li>Use a hook where a CLAUDE.md rule would do. Reserve hooks for things you cannot trust to memory.</li>
+            <li>Forget hooks persist. A noisy hook adds noise to every session until you remove it.</li>
+            <li>Write hooks in languages you cannot debug. Bash is fine if you keep them small.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Misconfiguring a hook path, then wondering why nothing works. Use absolute paths or <code>$CLAUDE_PROJECT_DIR</code>. Run <code>/doctor</code> if a hook is silently failing.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Add a Stop hook that prints "Session done at $(date)" to a log file. Wire it up in <code>.claude/settings.local.json</code>. Run a session, send any message, end the session. Check the log. You just instrumented Claude.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 15 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

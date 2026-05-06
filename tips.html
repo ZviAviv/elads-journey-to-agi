@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tips Index · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="glossary.html">Glossary</a>
+        <a href="tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="glossary-head">
+      <div class="module-meta">
+        <span class="part-tag">Reference</span>
+        <span class="num-big">T</span>
+      </div>
+      <h1 class="module-title">Tips & best practices.</h1>
+    </header>
+
+    <section class="search-wrap">
+      <label for="search">Filter by keyword</label>
+      <input type="search" id="search" placeholder="Type a word: 'plan mode', 'commit', 'context'..." autocomplete="off">
+      <p class="search-hint">Every Do and Don't from across the guide, in one place.</p>
+    </section>
+
+    <p style="max-width: var(--measure); color: var(--muted);">When you forget which mode to use, when to /compact, or whether to write a skill or a hook — here it is. Grouped by topic. Searchable.</p>
+
+    <!-- M01 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 01 · <a href="modules/01-what-is-an-agent.html">What's an agent?</a></div>
+      <h2>Agents vs chat</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Reach for an agent when the task touches files, commands, or multiple steps.</li>
+          <li>Give context up front: file paths, error messages, what success looks like.</li>
+          <li>Expect the agent to ask questions back. Answer them.</li>
+          <li>Let the agent iterate. Watch the loop. Course-correct early.</li>
+          <li>Use chat for things with no side effects: explain, brainstorm, summarize.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Treat the agent like a search engine.</li>
+          <li>Send vague prompts and hope.</li>
+          <li>Walk away while the agent works in your real folders.</li>
+          <li>Assume the agent already knows your project on the first prompt.</li>
+          <li>Paste a 200-line file into chat to get help editing it.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M02 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 02 · <a href="modules/02-code-vs-cowork-vs-chat.html">Code vs Cowork vs Chat</a></div>
+      <h2>Picking the right surface</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Default to chat for "explain this" or "what would you do."</li>
+          <li>Use Cowork when work lives in Drive, Gmail, or a spreadsheet.</li>
+          <li>Use Claude Code when work lives in a folder on your machine.</li>
+          <li>Move work between surfaces deliberately.</li>
+          <li>Bookmark all three. Friction kills the habit.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Paste your codebase into chat.</li>
+          <li>Try to build a real product in Cowork.</li>
+          <li>Open Claude Code to ask "what is a closure."</li>
+          <li>Assume one surface knows what you did in another.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M03 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 03 · <a href="modules/03-your-first-prompt.html">Your first prompt</a></div>
+      <h2>Writing prompts that work</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Lead with the goal, then constraints, then details.</li>
+          <li>Paste error messages and stack traces verbatim.</li>
+          <li>Ask for a plan before any change you would not want to undo.</li>
+          <li>Reference patterns: "use the same style as Button.tsx."</li>
+          <li>Tell the agent what NOT to do, not just what to do.</li>
+          <li>End with success criteria. One sentence is enough.</li>
+          <li>Show examples or screenshots when the work is visual.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Write a prompt like a Slack message. Specificity is kindness.</li>
+          <li>Stack ten asks into one prompt.</li>
+          <li>Assume the agent remembers yesterday's session.</li>
+          <li>Bury the key requirement in the third paragraph.</li>
+          <li>Apologize or pad. It does not improve results.</li>
+          <li>Send "fix it" without saying what "it" or "fixed" mean.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M04 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 04 · <a href="modules/04-tokens-and-memory.html">Tokens & memory</a></div>
+      <h2>Managing context and memory</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Run <code>/init</code> the moment you open a new project.</li>
+          <li>Keep CLAUDE.md short and factual. Aim under 200 lines.</li>
+          <li>Use nested CLAUDE.md files for scope-specific rules.</li>
+          <li>Check <code>/context</code> when responses get sluggish.</li>
+          <li>Use <code>/compact focus on …</code> before context hits 80%.</li>
+          <li>Use <code>/clear</code> when switching to a totally different task.</li>
+          <li>Read <code>/memory</code> every week or two and prune.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Treat CLAUDE.md as a notebook. It is a contract.</li>
+          <li>Paste long reference material into chat hoping Claude remembers.</li>
+          <li>Run <code>/compact</code> at 30% context.</li>
+          <li>Stuff every preference into one massive CLAUDE.md.</li>
+          <li>Forget that auto-memory persists across sessions.</li>
+          <li>Repeat instructions in every prompt that already live in CLAUDE.md.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M05 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 05 · <a href="modules/05-modes.html">Modes</a></div>
+      <h2>Choosing the right mode</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Use Plan mode before any change you cannot easily undo.</li>
+          <li>Cycle modes mid-session with <code>Shift+Tab</code>.</li>
+          <li>Drop to Ask permissions in production code.</li>
+          <li>Plan mode + Opus is one of the strongest combos.</li>
+          <li>Set <code>defaultMode: "acceptEdits"</code> in settings if you trust yourself.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Use Bypass on your laptop. Ever.</li>
+          <li>Stay in Plan mode and wonder why nothing happens.</li>
+          <li>Leave Auto Accept on overnight.</li>
+          <li>Switch to Auto in a repo you have not committed cleanly.</li>
+          <li>Treat the modes as a setting you set once.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M06 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 06 · <a href="modules/06-models.html">Models</a></div>
+      <h2>Picking models</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Default to Sonnet. Switch only when the task tells you to.</li>
+          <li>Use <code>opusplan</code> for big tasks.</li>
+          <li>Drop to Haiku for repetitive work.</li>
+          <li>Switch mid-session with <code>/model</code>.</li>
+          <li>Try <code>opus[1m]</code> or <code>sonnet[1m]</code> for huge codebases.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Use Opus for everything.</li>
+          <li>Use Haiku for novel architectural decisions.</li>
+          <li>Crank effort to <code>max</code> and forget it.</li>
+          <li>Assume the model picks itself based on the prompt.</li>
+          <li>Switch models five times in one task.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M07 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 07 · <a href="modules/07-skills.html">Skills</a></div>
+      <h2>Writing skills</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Write a skill the second time you paste the same instructions.</li>
+          <li>Make the description specific and verb-first.</li>
+          <li>Set <code>disable-model-invocation: true</code> for side effects.</li>
+          <li>Keep SKILL.md short; move long material to separate files.</li>
+          <li>Commit project-level skills to git.</li>
+          <li>Iterate live. Edits apply on next invocation.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Stuff one mega-skill with eight unrelated tasks.</li>
+          <li>Write vague descriptions.</li>
+          <li>Put procedures in CLAUDE.md when they should be skills.</li>
+          <li>Forget to test a new skill.</li>
+          <li>Build skills for things Claude already does well unprompted.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M08 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 08 · <a href="modules/08-slash-commands.html">Slash commands</a></div>
+      <h2>Daily slash commands</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Run <code>/help</code> the first time you open the app.</li>
+          <li>Use <code>/rename</code> on any session you might want to find again.</li>
+          <li>Use <code>/context</code> proactively when responses get sluggish.</li>
+          <li>Mental shortcut: <code>/clear</code> for new task, <code>/compact</code> to continue.</li>
+          <li>Use <code>/doctor</code> first when something feels broken.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Type <code>/clear</code> thinking you are deleting history.</li>
+          <li>Memorize commands you never use.</li>
+          <li>Use <code>/compact</code> at low context.</li>
+          <li>Run <code>/init</code> on a project with a customized CLAUDE.md.</li>
+          <li>Forget arguments after the slash are a thing.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M09 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 09 · <a href="modules/09-plugins.html">Plugins</a></div>
+      <h2>Installing plugins</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Stick to the official marketplace until you have a reason not to.</li>
+          <li>Read what tools the plugin requests.</li>
+          <li>Install one plugin at a time.</li>
+          <li>Uninstall plugins you stop using.</li>
+          <li>Look at well-made plugins as study material.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Install plugins for things Claude Code already does.</li>
+          <li>Pile up plugins to feel productive.</li>
+          <li>Trust unsigned plugins from random repos.</li>
+          <li>Forget plugins persist and load at startup.</li>
+          <li>Confuse plugins with MCP servers.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M10 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 10 · <a href="modules/10-sessions.html">Sessions</a></div>
+      <h2>Managing sessions</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Rename any session you might want to find again.</li>
+          <li><code>/clear</code> when switching to an unrelated task in the same folder.</li>
+          <li>Use git worktrees for true parallel work in one repo.</li>
+          <li>Use <code>/branch</code> for "what if" experiments without losing thread.</li>
+          <li>Treat <code>/resume</code> as your save game menu.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Run two Desktop sessions on the exact same folder.</li>
+          <li>Let one session run forever.</li>
+          <li>Delete <code>~/.claude/projects/</code>.</li>
+          <li>Forget you have a session running in another window.</li>
+          <li>Use <code>/branch</code> when you actually need a worktree.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M11 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 11 · <a href="modules/11-permissions.html">Permissions</a></div>
+      <h2>Settings & permissions</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Run <code>/permissions</code> to see what is allowed.</li>
+          <li>Add specific commands to allow as you notice repeat prompts.</li>
+          <li>Always deny destructive commands explicitly.</li>
+          <li>Keep project-level settings checked into git.</li>
+          <li>Use <code>.claude/settings.local.json</code> for personal overrides.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Allow broad patterns to silence prompts.</li>
+          <li>Set <code>bypassPermissions</code> on your work machine.</li>
+          <li>Forget the precedence: local &gt; project &gt; user.</li>
+          <li>Grant network access to plugins that should not need it.</li>
+          <li>Edit settings mid-session and expect changes to apply.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M12 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 12 · <a href="modules/12-git-worktrees.html">Git basics</a></div>
+      <h2>Git for agents</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Commit before you start an agentic task. Always.</li>
+          <li>Whitelist specific git commands in settings.</li>
+          <li>Use worktrees for two Claude sessions on the same repo.</li>
+          <li>Let Claude write commit messages.</li>
+          <li>Run <code>git status</code> before any big agent task.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Allow <code>Bash(git *)</code> as a blanket.</li>
+          <li>Run two Claude sessions in the same folder on the same branch.</li>
+          <li>Leave secrets out of <code>.gitignore</code>.</li>
+          <li>Accept commits without reading the diff.</li>
+          <li>Force-push to shared branches without warning the team.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M13 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 13 · <a href="modules/13-subagents.html">Subagents</a></div>
+      <h2>Delegating to subagents</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Use Explore subagents for "find all the places X happens."</li>
+          <li>Brief subagents fully. They do not see your conversation.</li>
+          <li>Restrict each subagent's tools to what it needs.</li>
+          <li>Define subagents for recurring patterns.</li>
+          <li>Let Claude pick the subagent automatically when descriptions match.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Spawn subagents for trivial tasks.</li>
+          <li>Give subagents broad tool access.</li>
+          <li>Define ten subagents you might use. Define the two you actually will.</li>
+          <li>Forget subagents do not share memory.</li>
+          <li>Confuse subagents with parallel sessions.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M14 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 14 · <a href="modules/14-mcp.html">MCP</a></div>
+      <h2>Adding MCP servers</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Add an MCP only when you have a specific service to act on regularly.</li>
+          <li>Read the auth and permission requirements first.</li>
+          <li>Use tool search to defer loading MCP definitions.</li>
+          <li>Prefer official MCPs from the registry.</li>
+          <li>Rotate API keys regularly.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Install ten MCPs in case you might need them.</li>
+          <li>Give MCP servers more permission than they need.</li>
+          <li>Assume MCPs are free.</li>
+          <li>Confuse MCP with subagents or plugins.</li>
+          <li>Trust unofficial MCPs blindly.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M15 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 15 · <a href="modules/15-hooks.html">Hooks</a></div>
+      <h2>Writing hooks</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Reach for hooks when you want a guarantee, not guidance.</li>
+          <li>Keep hook scripts fast.</li>
+          <li>Use <code>$CLAUDE_PROJECT_DIR</code> for portable paths.</li>
+          <li>Test hooks locally with sample JSON input.</li>
+          <li>Use <code>.claude/settings.local.json</code> while iterating.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Put long-running scripts in hooks.</li>
+          <li>Hide important information in hook output you never read.</li>
+          <li>Use a hook where a CLAUDE.md rule would do.</li>
+          <li>Forget hooks persist.</li>
+          <li>Write hooks in languages you cannot debug.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <!-- M16 -->
+    <section class="tips-section" data-search-item>
+      <div class="tips-section-label">Module 16 · <a href="modules/16-claude-design.html">Claude Design vs Code</a></div>
+      <h2>Picking Design or Code</h2>
+      <div class="practices">
+        <div class="do"><h3>Do</h3><ul>
+          <li>Use Claude Design for anything that lives as pixels.</li>
+          <li>Use Claude Code for anything that lives as files.</li>
+          <li>Hand off intentionally: design first, then build.</li>
+          <li>Open both apps if your work alternates.</li>
+        </ul></div>
+        <div class="dont"><h3>Don't</h3><ul>
+          <li>Try to build production software in Claude Design.</li>
+          <li>Try to design a brand in Claude Code.</li>
+          <li>Confuse Claude Design with chat Artifacts.</li>
+          <li>Assume one will replace the other.</li>
+        </ul></div>
+      </div>
+    </section>
+
+    <p data-no-results style="display:none; text-align:center; padding:2rem; font-family: var(--font-mono); color: var(--muted);">No matches.</p>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Tips Index · Elad's Journey to GAI</span>
+      <span><code>/</code> to focus search</span>
+    </footer>
+  </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

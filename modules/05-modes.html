@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 — Modes · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 2 · The Engine</span>
+        <span class="num-big">05</span>
+      </div>
+      <h1 class="module-title">Modes. The dial between cautious and unleashed.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">A mode is how much permission you give the agent before it acts. The right mode for the moment is the difference between fast and frightening.</p>
+
+      <h2>The five modes</h2>
+      <p>Cycle through them in the Desktop app with <code>Shift+Tab</code>. The mode indicator sits next to the send button.</p>
+      <ol>
+        <li><strong>Ask permissions (default).</strong> Claude asks before every file edit and every shell command. Slowest. Safest. Where you start.</li>
+        <li><strong>Auto Accept Edits.</strong> Edits and basic file operations (mkdir, mv, touch) happen automatically. Other shell commands still ask. The everyday mode for trusted work.</li>
+        <li><strong>Plan mode.</strong> Read-only. Claude can look, search, think, and propose. Cannot edit, cannot run anything. You approve the plan, then switch modes to execute.</li>
+        <li><strong>Auto.</strong> Full execution with background safety checks. Research preview. Available on higher plans. For repetitive trusted work where you want to step away.</li>
+        <li><strong>Bypass permissions.</strong> No prompts at all. Only run this inside a sandbox or VM. Never on your main machine.</li>
+      </ol>
+
+      <figure class="figure">
+        <span class="figure-label">Permission ladder</span>
+        <div class="ladder">
+          <div class="ladder-row" data-risk="low">
+            <div class="ladder-rung">01</div>
+            <div class="ladder-content">
+              <p class="name">Ask permissions</p>
+              <p class="desc">Claude asks before every edit and command. Safest. Where you start.</p>
+            </div>
+          </div>
+          <div class="ladder-row" data-risk="low">
+            <div class="ladder-rung">02</div>
+            <div class="ladder-content">
+              <p class="name">Plan mode</p>
+              <p class="desc">Read-only. Looks, searches, proposes. Cannot touch anything.</p>
+            </div>
+          </div>
+          <div class="ladder-row" data-risk="med">
+            <div class="ladder-rung">03</div>
+            <div class="ladder-content">
+              <p class="name">Auto Accept Edits</p>
+              <p class="desc">Edits and basic file ops run automatically. Other shell commands still ask.</p>
+            </div>
+          </div>
+          <div class="ladder-row" data-risk="med">
+            <div class="ladder-rung">04</div>
+            <div class="ladder-content">
+              <p class="name">Auto</p>
+              <p class="desc">Full execution with background safety checks. For trusted repetitive work.</p>
+            </div>
+          </div>
+          <div class="ladder-row" data-risk="high">
+            <div class="ladder-rung">05</div>
+            <div class="ladder-content">
+              <p class="name">Bypass permissions</p>
+              <p class="desc">No prompts at all. Sandbox or VM only. Never on your main machine.</p>
+            </div>
+          </div>
+        </div>
+        <p class="figure-caption">Cycle the ladder with <code>Shift+Tab</code>. Climb up as trust grows. Climb down when stakes rise.</p>
+      </figure>
+
+      <h2>The right mode at the right time</h2>
+      <p>Big refactor or unfamiliar code? <strong>Plan mode</strong> first. Read the plan. Ask questions. Then switch.</p>
+      <p>You know exactly what you want and trust the change set? <strong>Auto Accept Edits.</strong> Save your wrists.</p>
+      <p>Learning, exploring, working in someone else's codebase? <strong>Ask permissions.</strong> Friction is the feature.</p>
+      <p>Sandbox VM doing nightly tasks? <strong>Bypass.</strong> Anywhere else? No.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Use Plan mode before any change you cannot easily undo.</li>
+            <li>Cycle modes mid-session with <code>Shift+Tab</code>. Start strict, loosen as trust grows.</li>
+            <li>Drop to Ask permissions when working in production code or a teammate's repo.</li>
+            <li>Plan mode + Opus is one of the strongest combos. Use it when stakes are high.</li>
+            <li>Set <code>defaultMode: "acceptEdits"</code> in your settings if you trust yourself in your own projects.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Use Bypass on your laptop. Ever. It will eventually delete something you needed.</li>
+            <li>Stay in Plan mode and wonder why nothing is happening. Plan mode never edits.</li>
+            <li>Leave Auto Accept on overnight. Distracted you is not the same as trusted you.</li>
+            <li>Switch to Auto in a repo you have not committed cleanly first.</li>
+            <li>Treat the modes as a setting you set once. They are a knob. Turn it.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Forgetting which mode you are in. The indicator is small. Glance at it before you walk away from the keyboard.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Open <code>elad-test</code>. Press <code>Shift+Tab</code> twice to enter Plan mode. Ask: <em>"propose a plan to add three more journal entries to my journal folder, dated for the next three days."</em> Read the plan. Now <code>Shift+Tab</code> back to Auto Accept Edits and say "go." Notice how the modes split thinking from doing.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 05 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

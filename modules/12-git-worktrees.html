@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 — Git basics for agents · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 4 · Going Further</span>
+        <span class="num-big">12</span>
+      </div>
+      <h1 class="module-title">Git for agents. Your safety net and your time machine.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">You do not need to be a git expert to use Claude Code well. You need to know two things: commit before you experiment, and use worktrees when you want parallel agents.</p>
+
+      <h2>Why git matters here</h2>
+      <p>Agents move fast. They edit many files. Sometimes they go in a direction you do not want. Git is the undo button. With one clean commit before you start, every wrong turn is a <code>git reset</code> away from gone.</p>
+      <p>If you do not yet use git, this is the time. <code>git init</code> in any folder, <code>git add .</code> and <code>git commit -m "first"</code> gives you a clean snapshot. Now Claude can experiment freely.</p>
+
+      <h2>Letting Claude commit</h2>
+      <p>Claude can commit on your behalf. Just ask: <em>"commit these changes with a clear message."</em> Add specific git commands to your <code>permissions.allow</code> so it does not prompt every time:</p>
+      <pre><code>"Bash(git status)",
+"Bash(git diff *)",
+"Bash(git add *)",
+"Bash(git commit *)"</code></pre>
+      <p>Leave <code>git push</code> in <code>ask</code> or omit it. Pushing is a public action; you should look first.</p>
+
+      <h2>Worktrees: parallel agents in one repo</h2>
+      <p>A worktree is a separate folder on your filesystem checked out to a different branch of the same repository. Two folders, two branches, two isolated workspaces. Two Claude Code sessions can run in parallel without colliding.</p>
+      <pre><code>git worktree add ../elad-test-experiment experiment-branch</code></pre>
+      <p>Now you have <code>elad-test/</code> on main and <code>elad-test-experiment/</code> on the experiment branch. Open Claude Code in each. They cannot collide.</p>
+
+      <h2>What to gitignore</h2>
+      <p>Add to <code>.gitignore</code>:</p>
+      <pre><code>.env
+.env.local
+node_modules/
+.DS_Store
+.claude/settings.local.json</code></pre>
+      <p>Anything with secrets, anything machine-specific, anything generated. If Claude can see it, Claude might suggest changes to it. Hide what should be hidden.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Commit before you start an agentic task. Always.</li>
+            <li>Whitelist specific git commands in settings. Reduce prompts without granting blanket access.</li>
+            <li>Use worktrees when you want to run two Claude sessions on the same repo.</li>
+            <li>Let Claude write commit messages. They are usually clear and consistent.</li>
+            <li>Run <code>git status</code> before any big agent task. Clean state = clean diff at the end.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Allow <code>Bash(git *)</code> as a blanket. <code>git push --force</code> can erase team history.</li>
+            <li>Run two Claude sessions in the same folder on the same branch. Use a worktree.</li>
+            <li>Leave secrets out of <code>.gitignore</code>. <code>.env</code> files end up in commits this way.</li>
+            <li>Accept commits without reading the diff. <code>/diff</code> shows everything; review it.</li>
+            <li>Force-push to shared branches without warning the team. Even if Claude does it for you.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Confusing git branches with git worktrees. A branch is a label on a commit. A worktree is a physical folder containing files. Two branches, one folder = you switch and lose state. Two worktrees, two folders = you keep both alive.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> In <code>elad-test</code>, run <code>git init</code> and commit your existing files. Now ask Claude: <em>"create a git worktree at ../elad-test-experiment on a new branch called experiment, then open it for me."</em> You now have two folders, two branches, ready for two parallel agents.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 12 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 — What's an agent? · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 1 · The Frame</span>
+        <span class="num-big">01</span>
+      </div>
+      <h1 class="module-title">What's an agent? And why it isn't ChatGPT.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">Chat answers. Agents <em>do</em>. That single difference rearranges everything you know about working with AI.</p>
+
+      <h2>The core idea</h2>
+      <p>When you talk to Claude.ai or ChatGPT in a browser, you are talking to a very fluent text generator. It sees your message and the conversation history. That is the entire universe it has access to. It writes back. You read. You decide what to do.</p>
+      <p>Claude Code is different. Claude Code can read the files on your computer, run commands in the terminal, search the web, and edit files in place. It does this in a loop. It reads, decides, acts, checks the result, and decides what to do next, on its own, until the task is done or you stop it.</p>
+      <p>That loop is the whole game. An agent is a model with hands. Chat is a model with a microphone.</p>
+
+      <figure class="figure">
+        <span class="figure-label">The agent loop</span>
+        <div class="figure-body">
+          <div class="agent-loop">
+            <div class="agent-loop-step">
+              <div class="num">01</div>
+              <div class="label">Read</div>
+              <p class="desc">Looks at your prompt, the files, the last tool output.</p>
+            </div>
+            <div class="agent-loop-step">
+              <div class="num">02</div>
+              <div class="label">Decide</div>
+              <p class="desc">Picks the next action. Read another file, write code, run a command.</p>
+            </div>
+            <div class="agent-loop-step">
+              <div class="num">03</div>
+              <div class="label">Act</div>
+              <p class="desc">Uses a tool. Edits a file. Runs the test. Hits the API.</p>
+            </div>
+            <div class="agent-loop-step">
+              <div class="num">04</div>
+              <div class="label">Check</div>
+              <p class="desc">Reads the result. Did it work? If not, back to step 01.</p>
+            </div>
+          </div>
+          <span class="agent-loop-arrow">↻ until done, or you stop it</span>
+        </div>
+        <p class="figure-caption">Chat does step 02 once and stops. An agent runs the whole loop, on its own, as many times as the task needs.</p>
+      </figure>
+
+      <h2>How it looks in Claude Code Desktop</h2>
+      <p>You will see Claude open files on its own. You will see it run a command in a small terminal panel and read the output. You will see it edit a file and show you the diff. You can interrupt at any moment. You can roll back. You can ask it to try again differently.</p>
+      <p>The Desktop app puts all of this in one window: chat on the left, file diffs in the middle, an embedded terminal and preview when you need them. Three tabs across the top: <strong>Chat</strong>, <strong>Cowork</strong>, <strong>Code</strong>. Module 02 covers when to use which.</p>
+
+      <h2>The mental model that helps</h2>
+      <p>Stop thinking "I am asking a question." Start thinking "I am giving a job to a junior teammate who reads fast, never tires, but needs context and clear success criteria." Everything else in this guide builds on that shift.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Reach for an agent when the task touches files, commands, or multiple steps.</li>
+            <li>Give context up front: file paths, error messages, what success looks like.</li>
+            <li>Expect the agent to ask questions back. Answer them. That is steering, not interruption.</li>
+            <li>Let the agent iterate. It runs, checks, fixes. Watch the loop. Course-correct early when needed.</li>
+            <li>Use chat (Claude.ai or ChatGPT) for things with no side effects: explain a concept, brainstorm, summarize a paste.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Treat the agent like a search engine. "How does OAuth work" belongs in chat.</li>
+            <li>Send vague prompts and hope. "Make it faster" wastes everyone's time. State the real goal.</li>
+            <li>Walk away while the agent works in your real folders without checking what mode it is in.</li>
+            <li>Assume the agent already knows your project on the first prompt. It is reading as it goes.</li>
+            <li>Paste a 200-line file into chat to get help editing it. Open the project in Claude Code instead.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Treating Claude Code like ChatGPT-but-in-an-app. The shift is not the interface. It is that the model now has tools and a workspace. Lean into that, or you will use a Ferrari to deliver pizza one slice at a time.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Open Claude.ai in your browser. Ask: <em>"Rename every file in my Downloads folder that starts with 'IMG_' to start with '2026_' instead."</em></p>
+        <p>Watch what happens. It will explain the steps. It will not rename anything. That is chat.</p>
+        <p>Now in Claude Code Desktop, open your Downloads folder as a project and ask the same thing. Notice the difference. That is an agent.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 01 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

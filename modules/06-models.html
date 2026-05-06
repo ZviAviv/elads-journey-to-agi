@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06 — Models · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 2 · The Engine</span>
+        <span class="num-big">06</span>
+      </div>
+      <h1 class="module-title">Models. Three Claudes. Pick the right one.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">Opus thinks hardest. Sonnet works hardest. Haiku moves fastest. The trick is not picking once. It is switching mid-session.</p>
+
+      <h2>The lineup (2026)</h2>
+      <ul>
+        <li><strong>Opus 4.7.</strong> The deepest reasoner. Best for architecture, novel problems, tricky bugs, anything where being right matters more than being fast. Most expensive per token.</li>
+        <li><strong>Sonnet 4.6.</strong> The default. Fast enough for daily work, smart enough for almost everything you will do in a day. Best balance.</li>
+        <li><strong>Haiku 4.5.</strong> Lightning fast, very cheap. Great for simple edits, generating boilerplate, running tests, summarizing logs.</li>
+      </ul>
+
+      <figure class="figure">
+        <span class="figure-label">The lineup, 2026</span>
+        <div class="models">
+          <div class="model-card">
+            <span class="speed-icon">▮▮▮▯▯</span>
+            <div class="tier">Deepest</div>
+            <h3 class="name">Opus</h3>
+            <div class="version">v4.7</div>
+            <p class="when">Architecture. Novel problems. Tricky bugs. When being right beats being fast.</p>
+          </div>
+          <div class="model-card">
+            <span class="speed-icon">▮▮▮▮▯</span>
+            <div class="tier">Default</div>
+            <h3 class="name">Sonnet</h3>
+            <div class="version">v4.6</div>
+            <p class="when">Daily work. Fast enough, smart enough for almost anything in a normal day.</p>
+          </div>
+          <div class="model-card">
+            <span class="speed-icon">▮▮▮▮▮</span>
+            <div class="tier">Fastest</div>
+            <h3 class="name">Haiku</h3>
+            <div class="version">v4.5</div>
+            <p class="when">Boilerplate. Tests. Log summaries. Simple edits at low cost.</p>
+          </div>
+        </div>
+        <p class="figure-caption">Switch mid-session with <code>/model</code>. The bars on top read as relative speed, not benchmark scores.</p>
+      </figure>
+
+      <h2>The aliases worth knowing</h2>
+      <p><code>/model sonnet</code> picks the latest Sonnet. <code>/model opus</code> picks the latest Opus. <code>/model haiku</code> picks the latest Haiku. <code>/model opusplan</code> uses Opus while planning and switches to Sonnet to execute. Best of both worlds for big tasks.</p>
+      <p>Fast mode (toggle with <code>/fast</code>) runs Opus 4.6 instead of 4.7 — slightly less capable, noticeably quicker, only available while on Opus.</p>
+
+      <h2>How to think about cost</h2>
+      <p>You are not paying for the conversation, you are paying for tokens. Opus on a long-context refactor can be ten times the cost of the same refactor on Sonnet. Sonnet is usually the right answer. Reach for Opus when you have a hard problem and reach for Haiku when you have a small one.</p>
+
+      <h2>Effort, the second dial</h2>
+      <p><code>/effort</code> tunes how hard the model thinks per turn. Default is <code>xhigh</code> on Opus. Drop to <code>high</code> or <code>medium</code> for cost savings on routine work. Crank to <code>max</code> for one truly hard problem, then turn it back down.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Default to Sonnet. Switch only when the task tells you to.</li>
+            <li>Use <code>opusplan</code> for big tasks. Opus to plan, Sonnet to do.</li>
+            <li>Drop to Haiku for repetitive work — formatting, tests, small fixes.</li>
+            <li>Switch mid-session with <code>/model</code>. No restart needed.</li>
+            <li>If you keep hitting context limits in a huge codebase, try <code>opus[1m]</code> or <code>sonnet[1m]</code> for the million-token window.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Use Opus for everything. You will burn through budget and gain little.</li>
+            <li>Use Haiku for novel architectural decisions. Wrong tool.</li>
+            <li>Crank effort to <code>max</code> and forget it. Reset after the hard turn.</li>
+            <li>Assume the model picks itself based on the prompt. You pick.</li>
+            <li>Switch models five times in one task. Decide and commit.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Confusing "model" and "effort." Model is which Claude. Effort is how hard that Claude thinks. Both matter. Opus on low effort can be weaker than Sonnet on high.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Pick a moderately hard question — for example, "design a folder structure for a personal newsletter project where I write monthly issues, each with images, drafts, and a published version." Ask Sonnet. Read the answer. Run <code>/model opus</code>. Ask the same question. Compare.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 06 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

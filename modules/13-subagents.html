@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13 — Subagents · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 4 · Going Further</span>
+        <span class="num-big">13</span>
+      </div>
+      <h1 class="module-title">Subagents. Delegating work without bloating context.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">A subagent is a fresh Claude with its own context window, sent off to do one task. It comes back with a summary. Your main conversation stays clean.</p>
+
+      <h2>Why subagents exist</h2>
+      <p>Some tasks generate a lot of intermediate noise: digging through hundreds of files, reading huge logs, running long research. If that noise lives in your main session, it crowds out the work you actually care about. A subagent contains it.</p>
+
+      <h2>How they work</h2>
+      <p>You define a subagent (or use one of the bundled ones). When you ask Claude to do a task that matches the subagent's description, Claude spawns a copy with that subagent's instructions, gives it the task, and waits. The subagent runs in its own context window. It returns a result. Your main session sees only the result, not the journey.</p>
+
+      <h2>Defining one</h2>
+      <p>Run <code>/agents</code> to manage subagents in the Desktop app. Each has a name, a description, an allowed tool list, and a system prompt. Bundled ones include things like <strong>Explore</strong> (read-heavy codebase exploration) and <strong>Plan</strong> (write a plan, do not edit).</p>
+
+      <h2>When to delegate</h2>
+      <p>Use a subagent when:</p>
+      <ul>
+        <li>The task generates output you will not re-read (search results, log digests).</li>
+        <li>The task is recurring and worth standardizing ("review every PR for security").</li>
+        <li>The task should not pollute the main conversation (research that produces a one-line answer).</li>
+      </ul>
+      <p>Skip a subagent when the task is fast and the result matters in context. Spawn overhead is real.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Use Explore subagents for "find all the places X happens" — they search and summarize.</li>
+            <li>Brief subagents fully. They do not see your conversation. Give them everything they need in the task prompt.</li>
+            <li>Restrict each subagent's tools to what it actually needs. A research subagent needs Read and Grep, not Edit.</li>
+            <li>Define subagents for recurring patterns: "run the security review subagent before any merge."</li>
+            <li>Let Claude pick the subagent automatically when the description matches your request.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Spawn subagents for trivial tasks. Spawn overhead is greater than the work.</li>
+            <li>Give subagents broad tool access. Wider access = wider blast radius.</li>
+            <li>Define ten subagents you might use. Define the two you actually will.</li>
+            <li>Forget that subagents do not share memory with each other or with the main session.</li>
+            <li>Confuse subagents with parallel sessions. Subagents return; sessions persist.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Briefing a subagent like you brief Claude in a chat: vague, hand-wavy, assuming context. Subagents start cold every time. The prompt has to stand on its own.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> In any project with more than ten files, ask: <em>"use the Explore subagent to find every place the word 'TODO' appears in this codebase, then summarize what kind of work is left."</em> Watch the main conversation stay short while the subagent does the digging.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 13 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

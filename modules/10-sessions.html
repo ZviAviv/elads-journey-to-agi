@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 — Sessions & parallel work · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 4 · Going Further</span>
+        <span class="num-big">10</span>
+      </div>
+      <h1 class="module-title">Sessions. Many conversations. None of them lost.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">A session is one continuous conversation with Claude in one folder. You can run several at once, name them, leave them, come back to them. Learning to manage sessions makes you twice as productive overnight.</p>
+
+      <h2>The mental model</h2>
+      <p>Each session is its own context window, its own history, its own memory of what was said. Sessions are tied to a folder. Open the same folder later and you can pick up where you left off. Open a different folder and you get a clean session for that one.</p>
+
+      <h2>The four moves</h2>
+      <p><code>/rename my-task</code> — give the current session a name so future-you can find it.</p>
+      <p><code>/clear</code> — end the current session and start fresh in the same folder. The old one is saved.</p>
+      <p><code>/resume</code> — open a picker of past sessions in this folder. Click one to continue it.</p>
+      <p><code>/branch</code> — fork the current session. Try an alternative approach without losing the original.</p>
+
+      <h2>Parallel sessions, the right way</h2>
+      <p>You can open several Desktop windows on the same machine, each with a different project folder. Each is an independent agent. Refactor in one, write copy in another, debug in a third.</p>
+      <p>For parallel work in the <em>same</em> repo, use git worktrees (full module next: <a href="12-git-worktrees.html">12 — Git basics for agents</a>). A worktree is a separate folder for the same repository on a different branch. Open Claude Code in each. They cannot collide.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Rename any session you might want to find again. <code>/rename auth-refactor</code>.</li>
+            <li><code>/clear</code> when you switch from one task to a totally unrelated one in the same folder.</li>
+            <li>Use git worktrees for true parallel work in one repo. One Claude per worktree.</li>
+            <li>Use <code>/branch</code> when you want to try "what if I did it the other way" without losing your current thread.</li>
+            <li>Treat <code>/resume</code> as your save game menu. It is.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Run two Desktop sessions on the exact same folder at the same time. They will trip over each other.</li>
+            <li>Let one session run forever. Past 1,000 turns, start a fresh one and link it via CLAUDE.md.</li>
+            <li>Delete <code>~/.claude/projects/</code>. That is where your session history lives.</li>
+            <li>Forget you have a session running in the other window. Glance at the activity indicator.</li>
+            <li>Use <code>/branch</code> when you actually need a worktree. Branches are conversational forks; worktrees are filesystem forks.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Assuming each tab in the Desktop app is a separate session. Multiple tabs of the <em>same</em> project share state. Multiple <em>windows</em> on different folders are independent. If unsure, use a fresh window.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> In <code>elad-test</code>, run <code>/rename day-one</code>. Send a message: <em>"remember the name of my favorite color is teal."</em> <code>/clear</code>. New session. Ask "what is my favorite color?" — it will not know. Now <code>/resume day-one</code>. Ask again. It remembers.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 10 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>

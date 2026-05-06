@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 — Your first prompt · Elad's Journey to GAI</title>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<div class="progress" aria-hidden="true"></div>
+<div class="frame">
+  <aside class="sidebar">
+    <button class="sidebar-toggle" aria-label="Toggle table of contents">☰ Contents</button>
+    <a href="../index.html" class="brand">
+      <div class="brand-mark">A crash course</div>
+      <div class="brand-title">Elad's Journey<br>to GAI</div>
+    </a>
+    <div class="sidebar-body">
+      <div data-sidebar-nav></div>
+      <div class="nav-aux">
+        <a href="../glossary.html">Glossary</a>
+        <a href="../tips.html">Tips Index</a>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="module-header">
+      <div class="module-meta">
+        <span class="part-tag">Part 2 · The Engine</span>
+        <span class="num-big">03</span>
+      </div>
+      <h1 class="module-title">Your first prompt. Stop reading. Start using.</h1>
+    </header>
+
+    <article class="module-body">
+      <p class="hook">You will learn more from one real session than from finishing this guide. So: install the app, sign in, write a prompt that actually moves something. Then come back.</p>
+
+      <h2>Get the app installed</h2>
+      <ol>
+        <li>Go to <code>claude.com/download</code>. Pick Mac or Windows.</li>
+        <li>Install like any other app. Open it. Sign in with your Anthropic account.</li>
+        <li>You will land on three tabs at the top: Chat, Cowork, Code. Click <strong>Code</strong>.</li>
+        <li>It will ask for a folder. Make a new empty folder somewhere safe (Desktop is fine), call it <code>elad-test</code>, and select it. This is your first project.</li>
+      </ol>
+
+      <h2>The prompt</h2>
+      <p>Type this into the message box at the bottom and send it:</p>
+      <pre><code>Make me a single HTML file called hello.html that says
+"Hello, Elad" in big black letters on a white page. Use one sans-serif font.
+Open it in my default browser when you are done.</code></pre>
+      <p>Watch what happens. Claude will tell you the plan, ask permission to write the file, write it, and then run a command to open it. You should see a browser tab open with your name in it. That is your first agentic loop.</p>
+
+      <h2>What just happened</h2>
+      <p>You gave Claude a goal in plain English. Claude turned it into a sequence: draft the file, write to disk, open in browser. Each tool use asked you to confirm. You said yes. The loop closed.</p>
+      <p>Now do it again, slightly different. Try: <em>"change Hello to Welcome and the background to off-white."</em> See how the agent reads your existing file before editing? That is what makes this different from chat.</p>
+
+      <blockquote class="pull">
+        A prompt is a brief to a junior teammate, not a search query. State the goal, hand over the context, name what "done" looks like.
+        <cite>— The whole guide in one sentence</cite>
+      </blockquote>
+
+      <h2>Six rules for prompts that work</h2>
+
+      <h3>1. State the outcome, not the steps.</h3>
+      <p>Bad: <em>"open vscode and create a file and write..."</em>. Good: <em>"create hello.html that shows my name."</em> Let the agent figure out how.</p>
+
+      <h3>2. Give context the agent cannot guess.</h3>
+      <p>Bad: <em>"fix the bug."</em> Good: <em>"the page in <code>hello.html</code> shows blank in Safari but works in Chrome. Find why and fix it."</em></p>
+
+      <h3>3. Ask for a plan first on anything non-trivial.</h3>
+      <p>Type: <em>"plan first, do not edit anything yet."</em> Claude will think out loud and propose steps. You read, push back, then say go. Saves hours.</p>
+
+      <h3>4. Name files and folders explicitly.</h3>
+      <p>Use real paths: <code>src/auth/login.tsx</code> not "the login file." If you do not know the path, ask Claude to find it first.</p>
+
+      <h3>5. Define done.</h3>
+      <p>Add success criteria: <em>"done means the test in <code>tests/login.test.js</code> passes and there are no console warnings."</em> Now Claude knows when to stop.</p>
+
+      <h3>6. Iterate. Do not write the perfect prompt.</h3>
+      <p>You are not engineering a one-shot wonder. You are conversing. Send a 70%-good prompt, react to what comes back, steer. Conversation beats manuscript every time.</p>
+
+      <h2>Best practices</h2>
+      <div class="practices">
+        <div class="do">
+          <h3>Do</h3>
+          <ul>
+            <li>Lead with the goal, then constraints, then details.</li>
+            <li>Paste error messages and stack traces verbatim. Never summarize them.</li>
+            <li>Ask for a plan before any change you would not want to undo.</li>
+            <li>Reference patterns: "use the same style as <code>src/components/Button.tsx</code>."</li>
+            <li>Tell the agent what <em>not</em> to do, not just what to do. "Do not change the public API."</li>
+            <li>End with success criteria. One sentence is enough.</li>
+            <li>Show examples or screenshots when the work is visual. Drag the image into the chat.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h3>Don't</h3>
+          <ul>
+            <li>Write a prompt like a Slack message. Specificity is kindness.</li>
+            <li>Stack ten asks into one prompt. One coherent task per turn.</li>
+            <li>Assume the agent remembers yesterday's session. Restate the spine.</li>
+            <li>Bury the key requirement in the third paragraph. Lead with it.</li>
+            <li>Apologize or pad ("if you don't mind, could you maybe..."). It does not improve results.</li>
+            <li>Send "fix it" without saying what "it" or "fixed" mean.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="trap">
+        <strong>Newbie trap</strong>
+        Trying to write the perfect prompt before you press Enter. Agents work in conversation. Send something rough. React to what comes back. The first turn is a probe, not a contract.
+      </div>
+
+      <div class="exercise">
+        <p><strong>Exercise.</strong> Stay in your <code>elad-test</code> folder. Without using a search engine, get Claude to: (1) make a folder called <code>journal</code>; (2) create a markdown file inside it for today's date with a heading and three bullet points about what you learned in this module; (3) tell you the full path to the file you just made.</p>
+        <p>If anything goes sideways, tell Claude what you wanted instead. That is the loop.</p>
+      </div>
+    </article>
+
+    <div class="pager" data-pager></div>
+
+    <footer class="colophon">
+      <span>Module 03 of 16</span>
+      <span><code>→</code> next · <code>/</code> search glossary</span>
+    </footer>
+  </main>
+</div>
+<script src="../app.js"></script>
+</body>
+</html>
